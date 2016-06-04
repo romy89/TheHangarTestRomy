@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html ng-app="appHanngar">
+    <head>
+        <title>Hangar O'clock Songs</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="format-detection" content="telephone=no"/>
+        <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+
+        <link rel="stylesheet" href="css/vendor/bootstrap.min.css">
+        <link rel="stylesheet" href="css/vendor/normalize.min.css">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <header>
+            <nav class="hidden-xs">
+                <ul class="pull-right">
+                    <li><a href="#">Now Playing</a></li>
+                    <li><a href="#">Rate Songs</a></li>
+                </ul>        
+            </nav>
+            <a href="#">
+                <img class="img-responsive" src="img/logo.png" alt="">
+            </a>
+        </header>
+        <div class="main-page">
+            <div id="songs" ng-controller="FindTracks">
+            <div class="search-content">
+                <input type="search" class="search" placeholder="Search Music">
+            </div>
+                
+                <ul>
+                    <li ng-repeat="track in tracks">
+                        <div class="details col-md-6 col-sm-6 col-xs-6">
+                            <button type="button" class="btn btn-primary playSong song-{[{$index}]}" 
+                            data-ng-click="playSong()" data-song="song-{[{$index}]}" data-toggle="modal" data-target=".modal-{[{$index}]}">Play</button>
+                            <p ng-bind="track.name"></p>
+                            <span ng-bind="track.album"></span>
+                        </div>
+                        <div class="btns col-md-6 col-sm-6 col-xs-6">
+                            <div class="btn-group pull-right" data-toggle="buttons">
+                          <label class="btn btn-primary">
+                            <input type="radio" name="options" id="option2" autocomplete="off"> Today
+                          </label>
+                          <label class="btn btn-primary">
+                            <input type="radio" name="options" id="option3" autocomplete="off"> Friday
+                          </label>
+                        </div>
+                        </div>
+                    </li>
+                </ul>
+              
+            
+            <div ng-repeat="track in tracks"  class="modal fade modal-{[{$index}]}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                  <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                      <img src="{[{track.images}]}" alt="">
+                      <audio id="song-{[{$index}]}" controls>
+                            <source type="audio/mpeg" ng-src="{[{track.audio}]}" />
+                      </audio>
+                        <div class="progressBar">
+                            <div class="timeBar"></div>
+                        </div>
+            
+                      <div class="details">
+                        <p ng-bind="track.name"></p>
+                        <span ng-bind="track.album"></span>
+                      </div>
+            
+                        <div class="controls">  
+                            <a href="" class="btn btn-back" id="back" 
+                            ng-click="getBackSong()"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span>
+                            </a>
+                            <a href="" class="btn btn-play {[{statusClass}]}" id="play" 
+                              ng-click="getPlaySong()"><span class="glyphicon glyphicon-play" aria-hidden="true">
+                            </a>
+                            <a href="" class="btn btn-next" id="next" 
+                              ng-click="getNextSong()"><span class="glyphicon glyphicon-forward" aria-hidden="true"></span>
+                            </a>
+                        </div>
+                    </div>
+                  </div>
+            
+                  
+                </div>
+            
+            
+            </div>
+        </div>
+        <footer>
+        <div class="content-footer">
+            <div class="col-md-6 col-xs-12">
+                <p>
+                   2011 The Hangar Interactive. All rights reserved.  
+                </p>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <nav class="pull-right">
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                    </nav>
+            </div>
+        </div>
+            
+        </footer>
+        
+      
+        <script src="js/vendor/jquery-1.11.1.min.js"></script>
+        <script src="js/vendor/bootstrap.min.js"></script>
+        <script src="js/vendor/bootstrap-slider.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.1/angular.min.js"></script>
+        <script src="js/main2.js"></script>
+        <script src="js/main.js"></script>
+        
+    </body>
+</html>
